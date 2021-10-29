@@ -1,3 +1,6 @@
+import sys
+
+
 def is_valid_ipv4(ipv4: str) -> bool:
     """Vérifie que l'adresse IPv4 est valide"""
     values = [int(e) for e in ipv4.split('.')]
@@ -15,8 +18,8 @@ def is_valid_ipv4(ipv4: str) -> bool:
 def ipv4_to_binary(ipv4) -> str:
     """Retourne la représentation binaire d'une adresse IPv4"""
     if not is_valid_ipv4(ipv4):
-        print("Error: bad format IPv4.")
-        return
+        print("Error: bad IPv4 format :", ipv4)
+        sys.exit()
 
     result = ''
     values = [int(e) for e in ipv4.split('.')]
@@ -42,10 +45,12 @@ def cidr(snmask) -> str:
 
 
 def max_ip_count(snmask) -> int:
+    """Retourne le nombre maxi d'adresse(s) utilisable(s)"""
     return 2**(32 - cidr(snmask)) - 2
 
 
 def subnet_ID(ipv4, snmask) -> str:
+    """Retourne l'identifiant sous-réseau (IDSR)"""
     ip = [int(e) for e in ipv4.split('.')]
     mask = [int(e) for e in snmask.split('.')]
 
@@ -53,18 +58,22 @@ def subnet_ID(ipv4, snmask) -> str:
 
 
 def broadcast_ip(ipv4, snmask) -> str:
-    return 'Not implemented'  # TODO
+    """Retourne l'adresse de broadcast (BRD)"""
+    ip = [int(e) for e in ipv4.split('.')]
+    mask = [255 - int(e) for e in snmask.split('.')]
 
-# ip_address = input('Adresse IP         : ')
-# subnet_mask = input('Masque sous-réseau : ')
+    return f'{ip[0] | mask[0]}.{ip[1] | mask[1]}.{ip[2] | mask[2]}.{ip[3] | mask[3]}'
 
 
-ip_address = '195.73.46.0'
-subnet_mask = '255.255.240.0'
+ip_address = input('Adresse IP         : ')
+subnet_mask = input('Masque sous-réseau : ')
+
+# ip_address = '195.73.46.0'
+# subnet_mask = '255.255.240.0'
 
 print()
-print('IP    :', ipv4_to_binary(ip_address))
-print('MSR   :', ipv4_to_binary(subnet_mask))
+print('IP    :', ipv4_to_binary(ip_address), f'({ip_address})')
+print('MSR   :', ipv4_to_binary(subnet_mask), f'({subnet_mask})')
 print('CIDR  :', cidr(subnet_mask))
 print('Nb IP :', max_ip_count(subnet_mask))
 print('IDSR  :', subnet_ID(ip_address, subnet_mask))
