@@ -4,10 +4,15 @@
 # négatif ou positif (on inclut cette fois le traitement du cas où le produit peut-être nul).
 # Attention toutefois, on ne doit pas calculer le produit !
 
-number1 = float(input('Entrez le premier nombre : '))
-number2 = float(input('Entrez le second nombre : '))
+def print_product_sign(num1: float, num2: float) -> None:
+    if (num1 <= 0 and num2 <= 0) or (num1 >= 0 and num2 >= 0):
+        print('Le produit est positif.')
+    elif (num1 < 0 or num2 < 0):
+        print('Le produit est négatif.')
 
-if (number1 <= 0 and number2 <= 0) or (number1 >= 0 and number2 >= 0):
-    print('Le produit et positif.')
-elif (number1 < 0 or number2 < 0):
-    print('Le produit et négatif.')
+
+if __name__ == '__main__':
+    number1 = float(input('Entrez le premier nombre : '))
+    number2 = float(input('Entrez le second nombre : '))
+
+    print_product_sign(number1, number2)

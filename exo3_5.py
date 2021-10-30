@@ -9,40 +9,63 @@
 
 # Peut-on concevoir plusieurs scripts équivalents menant à ce résultat ?
 
-age = int(input("Entrez l'âge de l'enfant : "))
+def print_age_group(age) -> None:
+    if age > 11:
+        print('Cadet')
+    elif age > 9:
+        print('Minime')
+    elif age > 7:
+        print('Pupille')
+    elif age > 5:
+        print('Poussin')
 
-if age >= 6 and age <= 7:
-    print('Poussin')
-if age >= 8 and age <= 9:
-    print('Pupille')
-if age >= 10 and age <= 11:
-    print('Minime')
-if age >= 12:
-    print('Cadet')
 
 # Alternative 1
+def print_age_group_alt1(age) -> None:
+    if age >= 6 and age <= 7:
+        print('Poussin')
+    elif age >= 8 and age <= 9:
+        print('Pupille')
+    elif age >= 10 and age <= 11:
+        print('Minime')
+    elif age >= 12:
+        print('Cadet')
 
-if age >= 6 and age <= 7:
-    print('Poussin')
-elif age >= 8 and age <= 9:
-    print('Pupille')
-elif age >= 10 and age <= 11:
-    print('Minime')
-elif age >= 12:
-    print('Cadet')
 
 # Alternative 2
-
-if age >= 6 and age <= 7:
-    print('Poussin')
-else:
+def print_age_group_alt2(age) -> None:
+    if age >= 6 and age <= 7:
+        print('Poussin')
     if age >= 8 and age <= 9:
         print('Pupille')
-    else:
-        if age >= 10 and age <= 11:
-            print('Minime')
-        else:
-            if age >= 12:
-                print('Cadet')
+    if age >= 10 and age <= 11:
+        print('Minime')
+    if age >= 12:
+        print('Cadet')
 
-# ... et d'autres
+
+# Alternative 3
+def print_age_group_alt3(age) -> None:
+    if age >= 6 and age <= 7:
+        print('Poussin')
+    else:
+        if age >= 8 and age <= 9:
+            print('Pupille')
+        else:
+            if age >= 10 and age <= 11:
+                print('Minime')
+            else:
+                if age >= 10:
+                    print('Cadet')
+
+
+# ... et d'autres variations...
+
+
+if __name__ == '__main__':
+    age = int(input("Entrez l'âge de l'enfant : "))
+
+    print_age_group(age)
+    print_age_group_alt1(age)
+    print_age_group_alt2(age)
+    print_age_group_alt3(age)
