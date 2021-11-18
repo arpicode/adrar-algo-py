@@ -68,9 +68,6 @@ def broadcast_ip(ipv4, snmask) -> str:
 ip_address = input('Adresse IP         : ')
 subnet_mask = input('Masque sous-réseau : ')
 
-# ip_address = '195.73.46.0'
-# subnet_mask = '255.255.240.0'
-
 print()
 print('IP    :', ipv4_to_binary(ip_address), f'({ip_address})')
 print('MSR   :', ipv4_to_binary(subnet_mask), f'({subnet_mask})')
