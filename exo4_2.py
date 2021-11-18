@@ -14,4 +14,5 @@ next_minutes = (minutes + 1) % 60
 if (next_minutes == 0):
     hours = (hours + 1) % 24
 
-print(f'Dans une minute, il sera {hours} heure(s) {next_minutes} minute(s)')
+print(
+    f'Dans une minute, il sera {hours:02d} heure(s) {next_minutes:02d} minute(s)')
