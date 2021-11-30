@@ -5,9 +5,9 @@
 
 MAX_GRADES = 9
 
-gradeList = [None] * MAX_GRADES
+gradeList = []
 
 for i in range(0, MAX_GRADES):
-    gradeList[i] = float(input(f'Saisir la note #{i + 1} : '))
+    gradeList.append(float(input(f'Saisir la note #{i + 1} : ')))
 
 print(f'Moyenne des notes : {round(sum(gradeList) / MAX_GRADES, 2)}')
