@@ -1,3 +1,4 @@
+import math
 from typing import Union
 
 COLOR_LIGHT_GREEN = '\033[92m'
@@ -51,11 +52,11 @@ def ask_for_values(num_values: int = 2) -> list[float]:
 def get_result(op: str, val: list) -> float:
     if op == '+':
         return add(val[0], val[1])
-    elif op == "-":
+    elif op == '-':
         return substract(val[0], val[1])
-    elif op == "*":
+    elif op == '*':
         return multiply(val[0], val[1])
-    elif op == "/":
+    elif op == '/':
         return divide(val[0], val[1])
 
 
@@ -72,7 +73,16 @@ def multiply(a: float, b: float) -> float:
 
 
 def divide(a: float, b: float) -> float:
-    return a / b
+    if b == 0:
+        print(f'{MSG_ERROR} Division par 0 !{COLOR_END}')
+        if a == 0:
+            result = 0
+        else:
+            result = a * math.inf
+    else:
+        result = a / b
+
+    return result
 
 
 if __name__ == '__main__':
