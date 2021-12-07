@@ -9,19 +9,12 @@ BOLD = '\033[1m'
 MSG_ERROR = '\033[30m\033[41m ERROR \033[0m'
 MSG_WARNING = '\033[30m\033[43m WARNING \033[0m'
 
-OPERATIONS = {
-    '+': 'Addition',
-    '-': 'Soustraction',
-    '*': 'Multiplication',
-    '/': 'Division'
-}
-
 
 def display_menu() -> None:
     print(f'{COLOR_LIGHT_CYAN}Choisir une opération :{COLOR_END}\n')
 
     for key in OPERATIONS:
-        print(f'\t{BOLD}{key}{COLOR_END} → {OPERATIONS[key]}.')
+        print(f'\t{BOLD}{key}{COLOR_END} → {OPERATIONS[key][0]}.')
 
     print(f'\n\t{COLOR_LIGHT_MAGENTA}Entrez 0 pour quitter.\n{COLOR_END}')
 
@@ -50,14 +43,7 @@ def ask_for_values(num_values: int = 2) -> list[float]:
 
 
 def get_result(op: str, val: list) -> float:
-    if op == '+':
-        return add(val[0], val[1])
-    elif op == '-':
-        return substract(val[0], val[1])
-    elif op == '*':
-        return multiply(val[0], val[1])
-    elif op == '/':
-        return divide(val[0], val[1])
+    return OPERATIONS[op][1](val[0], val[1])
 
 
 def add(a: float, b: float) -> float:
@@ -72,17 +58,50 @@ def multiply(a: float, b: float) -> float:
     return a * b
 
 
-def divide(a: float, b: float) -> float:
+def zero_division_result(a: float, b: float) -> Union[float, None]:
     if b == 0:
         print(f'{MSG_ERROR} Division par 0 !{COLOR_END}')
         if a == 0:
             result = 0
         else:
             result = a * math.inf
+
+
+def divide(a: float, b: float) -> float:
+    if b == 0:
+        result = zero_division_result(a, b)
     else:
         result = a / b
 
     return result
+
+
+def modulo(a: float, b: float) -> float:
+    if b == 0:
+        result = zero_division_result(a, b)
+    else:
+        result = a % b
+
+    return result
+
+
+def euclidean_division(a: float, b: float) -> int:
+    if b == 0:
+        result = zero_division_result(a, b)
+    else:
+        result = a // b
+
+    return int(result)
+
+
+OPERATIONS = {
+    '+': ['Addition', add],
+    '-': ['Soustraction', substract],
+    '*': ['Multiplication', multiply],
+    '/': ['Division', divide],
+    '%': ['Modulo', modulo],
+    '//': ['Division Euclidienne', euclidean_division],
+}
 
 
 if __name__ == '__main__':
